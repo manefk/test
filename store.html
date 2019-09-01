@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+</head>
+<body ng-app="app">
+
+<script>
+
+function Store() {
+	var arr = []
+
+	function get() {
+		return arr
+	}
+	function add(el, pos) {
+
+		if (typeof el !== 'number') {
+			throw Error("HEY ONLY NUMBERS")
+		}
+		if (pos && pos !== 'begin' && pos !=='end' && typeof pos !== 'number'){
+			throw Error("HEY ONLY NUMBERS")
+
+		}
+		if (pos == 'begin' || pos == 0) {
+			arr.unshift(el)
+			
+		}
+		if (pos == 'end' || !pos) {
+			arr.push(el)
+		}
+		
+		else {
+			arr.splice(pos, 0, el)
+		}
+	}
+	function pop(el) {
+		arr.pop(el)
+	}
+	function include(el) {
+		return arr.includes(el)
+	}
+
+	return {
+		add: add,
+		pop: pop,
+		include: include,
+		get: get
+	}
+
+}
+
+var store = Store();
+store.add(5)
+store.add(25)
+store.add(50)
+
+
+</script>
+</body>
+</html>
