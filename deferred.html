@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+</head>
+<body >
+
+<script>
+	class deferred {
+		constructor() {
+			this.cbs = []
+		}
+	
+		then(cb) {
+			this.cbs.push(cb)
+		}
+
+		resolve(v){
+			this.cbs.forEach(f => v = f(v))
+		}
+	}
+	
+	const arr = [
+		{
+			name: "First",
+			price: 500
+		},
+		{
+			name: "Second",
+			price: 100
+		},
+		{
+			name: "Third",
+			price: 0
+		}
+	]
+	const price = arr.reduce((acc,el) => acc + el.price , 0);
+
+</script>
+</body>
+</html>
