@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body >
+
+<div id="data"></div>
+
+<script>
+	window.onload = function() {
+
+		let todos = "";
+
+		const outputData = data => {
+			
+			data.forEach(todo => {
+				todos += `<li>${todo.title}</li>`
+			})
+
+			document.getElementById('data').innerHTML = todos
+		}
+
+		const url = "https://jsonplaceholder.typicode.com/todos"
+	
+		const getDatav1 = url => {
+			return fetch(url).then(resp => resp.json())
+		}
+
+		getDatav1(url)
+			.then(data => {
+				console.log(data);
+				outputData(data)		
+			})
+			.catch(error => console.log(error))
+
+ 
+	 	const getDatav2 = async url => {
+	 		try {
+	 			let resp = await fetch(url);
+	 			let data = await resp.json();
+	 			return data;
+	 		} catch (e){
+	 			console.log(e)
+	 		}
+
+ 		}
+
+ 		getDatav2(url)
+ 			.then(data => {
+ 				console.log(data);
+ 				outputData(data) 
+ 			}) 
+  }
+</script>
+</body>
+</html>
